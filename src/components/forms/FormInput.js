@@ -44,7 +44,7 @@ class FormInput extends React.Component {
             onFocus={this.onFocus}
             onBlur={this.onBlur}
             disabled={this.props.disabled ? true : false}
-            autoComplete="cabify-challenge"
+            autoComplete="off"
           />
           <label htmlFor={this.props.name}>{this.props.label}</label>
         </div>

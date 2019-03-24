@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import PrefixesList from "./PrefixesList.js";
+import FormPhonePrefixDropdown from "./FormPhonePrefixDropdown.js";
 
 class FormPhonePrefixSelect extends React.Component {
   constructor() {
@@ -59,7 +59,7 @@ class FormPhonePrefixSelect extends React.Component {
                 this.setState({ active: false });
               }}
             >
-              <PrefixesList
+              <FormPhonePrefixDropdown
                 onSelectCountry={this.onSelectCountry}
                 current={this.props.value}
               />

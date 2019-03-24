@@ -21,15 +21,7 @@ class App extends Component {
         address: "",
         prefix: ""
       },
-      errors: {
-        fullname: false,
-        jobdescription: false,
-        phonenumber: false,
-        email: false,
-        website: false,
-        address: false,
-        prefix: false
-      }
+      errors: {}
     };
 
     this.onChangeInputField = this.onChangeInputField.bind(this);
@@ -78,7 +70,7 @@ class App extends Component {
           <Card content={this.state.card} />
         </article>
         <article className="builder col col6">
-          <form className="form" action="" autoComplete="cabify-challenge">
+          <form className="form" action="" autoComplete="off">
             <div className="row">
               <div className="col col12">
                 <FormInput
@@ -134,7 +126,7 @@ class App extends Component {
               </div>
             </div>
             <div className="row row-separationMedium">
-              <div className="active disabled col col12">
+              <div className="col col12">
                 <FormInput
                   name="website"
                   label="Website"
@@ -146,7 +138,7 @@ class App extends Component {
               </div>
             </div>
             <div className="row row-separationMedium">
-              <div className="active col col12">
+              <div className="col col12">
                 <FormInput
                   name="address"
                   label="Address"
