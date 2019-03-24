@@ -1,0 +1,73 @@
+.prefixlist {
+  position: absolute;
+  overflow: auto;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+
+  border-radius: $radius;
+  background: $color-white;
+  padding: $spacing;
+
+  box-shadow: 0px 2px 4px $color-shadow-dark, 0px 0px 2px $color-shadow-dark;
+
+  > li {
+    border-radius: $radius;
+    padding: $spacing $spacing * 2;
+    background: $color-white;
+    cursor: pointer;
+
+    font-size: $font-size-l;
+    color: $color-positive-light;
+
+    &.current {
+      color: $color-martinique;
+    }
+
+    &:before {
+      content: "";
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: $spacing * 2;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+
+    &.es:before {
+      background-image: url(../images/flags/es.svg);
+    }
+    &.cl:before {
+      background-image: url(../images/flags/cl.svg);
+    }
+    &.pe:before {
+      background-image: url(../images/flags/pe.svg);
+    }
+    &.mx:before {
+      background-image: url(../images/flags/mx.svg);
+    }
+    &.co:before {
+      background-image: url(../images/flags/co.svg);
+    }
+    &.ve:before {
+      background-image: url(../images/flags/co.svg);
+    }
+    &.br:before {
+      background-image: url(../images/flags/cl.svg);
+    }
+
+    &:after {
+      float: right;
+      vertical-align: middle;
+      content: attr(data-prefix);
+      color: $color-positive-light;
+    }
+
+    &:hover {
+      background: $color-selago;
+    }
+  }
+}

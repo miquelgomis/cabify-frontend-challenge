@@ -59,6 +59,12 @@ input[type=number] {
 textarea {
   vertical-align: top; }
 
+@keyframes prefix-select {
+  0% {
+    height: 0px; }
+  100% {
+    height: 190px; } }
+
 body {
   background-color: #EEEEF0;
   color: #212240;
@@ -391,7 +397,9 @@ input:-webkit-autofill {
 .formField-input {
   display: flex;
   border-bottom: solid 1px #A7A7B3;
-  transition: all 0.3s ease; }
+  transition: all 0.3s ease;
+  background-repeat: no-repeat;
+  background-position: right 40px; }
   .formField-input.active .input label {
     top: 0; }
   .formField-input.focus {
@@ -403,6 +411,12 @@ input:-webkit-autofill {
     .formField-input.disabled .input input {
       color: #A7A7B3;
       cursor: not-allowed; }
+  .formField-input.error {
+    border-bottom: solid 1px #FC5959;
+    background-image: url(../images/warning.svg);
+    background-position: right center; }
+    .formField-input.error .input label {
+      color: #FC5959; }
   .formField-input .input {
     flex: 1 1 100%;
     position: relative; }
@@ -422,6 +436,70 @@ input:-webkit-autofill {
       width: 100%;
       font-size: 12px;
       line-height: 16px; }
+
+.formField-prefix {
+  display: flex;
+  border-bottom: solid 1px #A7A7B3;
+  transition: all 0.3s ease;
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: right 40px; }
+  .formField-prefix.active .input label {
+    top: 0; }
+  .formField-prefix.focus {
+    border-color: #7350FF; }
+    .formField-prefix.focus .input input {
+      color: #7350FF; }
+  .formField-prefix.disabled {
+    border-bottom: dotted 1px #A7A7B3; }
+    .formField-prefix.disabled .input input {
+      color: #A7A7B3;
+      cursor: not-allowed; }
+  .formField-prefix.error {
+    border-bottom: solid 1px #FC5959;
+    background-image: url(../images/warning.svg);
+    background-position: right center; }
+    .formField-prefix.error .input label {
+      color: #FC5959; }
+  .formField-prefix .input {
+    flex: 1 1 100%;
+    position: relative; }
+    .formField-prefix .input label {
+      color: #717285;
+      font-size: 11px;
+      line-height: 16px;
+      pointer-events: none;
+      position: absolute;
+      top: 16px;
+      right: 0;
+      left: 0;
+      transition: all 0.3s ease; }
+    .formField-prefix .input input {
+      background-color: transparent;
+      padding: 16px 0 8px;
+      width: 100%;
+      font-size: 12px;
+      line-height: 16px; }
+
+.formField-prefix-box {
+  position: absolute;
+  z-index: 1;
+  width: 240px;
+  height: 192px;
+  animation: prefix-select;
+  animation-duration: 300ms;
+  animation-iteration-count: 1; }
+  .formField-prefix-box:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    height: 24px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 100%);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px; }
 
 .button-primary {
   box-shadow: 0 1px 4px 0 rgba(33, 34, 64, 0.16), inset 0 1px 1px 0 rgba(255, 255, 255, 0.16); }
@@ -456,3 +534,55 @@ input:-webkit-autofill {
   font-size: 36px;
   line-height: 48px;
   color: #FFFFFF; }
+
+.prefixlist {
+  position: absolute;
+  overflow: auto;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  border-radius: 4px;
+  background: #FFFFFF;
+  padding: 8px;
+  box-shadow: 0px 2px 4px rgba(33, 34, 64, 0.32), 0px 0px 2px rgba(33, 34, 64, 0.32); }
+  .prefixlist > li {
+    border-radius: 4px;
+    padding: 8px 16px;
+    background: #FFFFFF;
+    cursor: pointer;
+    font-size: 14px;
+    color: #717285; }
+    .prefixlist > li.current {
+      color: #212240; }
+    .prefixlist > li:before {
+      content: "";
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 16px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-repeat: no-repeat;
+      background-position: center center; }
+    .prefixlist > li.es:before {
+      background-image: url(../images/flags/es.svg); }
+    .prefixlist > li.cl:before {
+      background-image: url(../images/flags/cl.svg); }
+    .prefixlist > li.pe:before {
+      background-image: url(../images/flags/pe.svg); }
+    .prefixlist > li.mx:before {
+      background-image: url(../images/flags/mx.svg); }
+    .prefixlist > li.co:before {
+      background-image: url(../images/flags/co.svg); }
+    .prefixlist > li.ve:before {
+      background-image: url(../images/flags/co.svg); }
+    .prefixlist > li.br:before {
+      background-image: url(../images/flags/cl.svg); }
+    .prefixlist > li:after {
+      float: right;
+      vertical-align: middle;
+      content: attr(data-prefix);
+      color: #717285; }
+    .prefixlist > li:hover {
+      background: #F8FAFB; }

@@ -1,9 +1,71 @@
-import React, { Component } from 'react';
-import cabifyLogo from './images/cabify-logo.svg';
-import './styles/App.css';
+import React, { Component } from "react";
+import cabifyLogo from "./images/cabify-logo.svg";
+import "./styles/App.css";
+
+import FormInput from "./components/forms/FormInput";
+import FormPhonePrefixSelect from "./components/forms/FormPhonePrefixSelect";
+import Card from "./components/modules/Card";
+import Title from "./components/modules/Title";
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      card: {
+        fullname: "",
+        jobdescription: "",
+        phonenumber: "",
+        email: "",
+        website: "www.cabify.com",
+        address: "",
+        prefix: ""
+      },
+      errors: {
+        fullname: false,
+        jobdescription: false,
+        phonenumber: false,
+        email: false,
+        website: false,
+        address: false,
+        prefix: false
+      }
+    };
+
+    this.onChangeInputField = this.onChangeInputField.bind(this);
+    this.onChangePrefixField = this.onChangePrefixField.bind(this);
+  }
+
+  onChangeInputField(e) {
+    this.setState({
+      card: Object.assign(this.state.card, {
+        [e.currentTarget.name]: e.currentTarget.value
+      }),
+      errors: Object.assign(this.state.errors, {
+        [e.currentTarget.name]: e.currentTarget.value.length ? false : true
+      })
+    });
+  }
+
+  onChangePrefixField(e) {
+    this.setState({
+      card: Object.assign(this.state.card, {
+        [e.name]: e.value
+      }),
+      errors: Object.assign(this.state.errors, {
+        [e.name]: false
+      })
+    });
+  }
+
   render() {
+    const submitButtonClass =
+      "button button-full button-primary " +
+      (Object.values(this.state.errors).every(item => item === false) &&
+      Object.values(this.state.card).every(item => item !== "")
+        ? "active"
+        : "disabled");
+
     return (
       <div className="mainWrapper row">
         <article className="businessCard col col6">
@@ -12,79 +74,94 @@ class App extends Component {
               <img src={cabifyLogo} alt="Cabify" />
             </a>
           </figure>
-          <h1 className="title-main">Request your business card</h1>
-          <div className="businessCard-cards">
-            <div className="businessCard-cardBack" />
-            <div className="businessCard-cardFront">
-              <div>
-                <p className="businessCard-cardFront-title">Laura Sánchez</p>
-                <p className="businessCard-cardFront-subtitle">Fronte</p>
-              </div>
-              <div className="businessCard-cardFront-bottom">
-                <p className="businessCard-icon-phone">+34 </p>
-                <p className="businessCard-icon-email"></p>
-                <p className="businessCard-icon-website">www.cabify.com</p>
-                <p className="businessCard-icon-address">Calle Pradillo 42. CP: 28002. Madrid</p>
-              </div>
-            </div>
-          </div>
+          <Title content="Request your business card" />
+          <Card content={this.state.card} />
         </article>
         <article className="builder col col6">
-          <form className="form" action="">
+          <form className="form" action="" autoComplete="cabify-challenge">
             <div className="row">
-              <div className="formField-input active col col12">
-                <div className="input">
-                  <input type="text" name="fullname" value="Laura Sánchez" />
-                  <label htmlFor="fullname">Full name</label>
-                </div>
+              <div className="col col12">
+                <FormInput
+                  name="fullname"
+                  label="Full name"
+                  value={this.state.card.fullname}
+                  errors={this.state.errors}
+                  onChangeInputField={this.onChangeInputField}
+                />
               </div>
             </div>
             <div className="row row-separationMedium">
-              {/* you probably need to add active/focus/disabled classNames */}
-              <div className="formField-input active focus col col12">
-                <div className="input">
-                  <input type="text" name="jobdescription" value="Fronte" />
-                  <label htmlFor="jobdescription">Job description</label>
-                </div>
+              <div className="col col12">
+                <FormInput
+                  name="jobdescription"
+                  label="Job description"
+                  value={this.state.card.jobdescription}
+                  errors={this.state.errors}
+                  onChangeInputField={this.onChangeInputField}
+                />
               </div>
             </div>
             <div className="row row-separationMedium row-gutterMedium">
               <div className="col col3">
-                {/* select field will be placed here */}
+                <FormPhonePrefixSelect
+                  name="prefix"
+                  label="Prefix"
+                  value={this.state.card.prefix}
+                  errors={this.state.errors}
+                  onChangeInputField={this.onChangeInputField}
+                  onChangePrefixField={this.onChangePrefixField}
+                />
               </div>
-              <div className="formField-input col col9">
-                <div className="input">
-                  <input type="tel" name="ponenumber" />
-                  <label htmlFor="ponenumber">Phone number</label>
-                </div>
-              </div>
-            </div>
-            <div className="row row-separationMedium">
-              <div className="formField-input col col12">
-                <div className="input">
-                  <input type="email" name="email" />
-                  <label htmlFor="email">Email</label>
-                </div>
-              </div>
-            </div>
-            <div className="row row-separationMedium">
-              <div className="formField-input active disabled col col12">
-                <div className="input">
-                  <input type="text" name="website" value="www.cabify.com" />
-                  <label htmlFor="website">Website</label>
-                </div>
+              <div className="col col9">
+                <FormInput
+                  name="phonenumber"
+                  label="Phone number"
+                  value={this.state.card.phonenumber}
+                  errors={this.state.errors}
+                  onChangeInputField={this.onChangeInputField}
+                />
               </div>
             </div>
             <div className="row row-separationMedium">
-              <div className="formField-input active col col12">
-                <div className="input">
-                  <input type="text" name="address" value="Calle Pradillo 42. CP: 28002. Madrid" />
-                  <label htmlFor="address">Address</label>
-                </div>
+              <div className="col col12">
+                <FormInput
+                  name="email"
+                  label="E-mail"
+                  value={this.state.card.email}
+                  errors={this.state.errors}
+                  onChangeInputField={this.onChangeInputField}
+                />
+              </div>
+            </div>
+            <div className="row row-separationMedium">
+              <div className="active disabled col col12">
+                <FormInput
+                  name="website"
+                  label="Website"
+                  disabled={true}
+                  value={this.state.card.website}
+                  errors={this.state.errors}
+                  onChangeInputField={this.onChangeInputField}
+                />
+              </div>
+            </div>
+            <div className="row row-separationMedium">
+              <div className="active col col12">
+                <FormInput
+                  name="address"
+                  label="Address"
+                  value={this.state.card.address}
+                  errors={this.state.errors}
+                  onChangeInputField={this.onChangeInputField}
+                />
               </div>
             </div>
             <div className="row row-separationHuge">
-              <input className="button button-full button-primary disabled" type="submit" value="Request" />
+              <input
+                className={submitButtonClass}
+                type="submit"
+                value="Request"
+              />
             </div>
           </form>
         </article>

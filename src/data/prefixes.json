@@ -1,0 +1,11 @@
+{
+  "countries": [
+    { "country": "Spain", "code": "es", "prefix": "+34" },
+    { "country": "Chile", "code": "cl", "prefix": "+56" },
+    { "country": "Peru", "code": "pe", "prefix": "+51" },
+    { "country": "Mexico", "code": "mx", "prefix": "+521" },
+    { "country": "Colombia", "code": "co", "prefix": "+57" },
+    { "country": "Brazil", "code": "br", "prefix": "+55" },
+    { "country": "Venezuela", "code": "ve", "prefix": "+58" }
+  ]
+}

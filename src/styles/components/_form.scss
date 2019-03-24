@@ -17,20 +17,23 @@ input:-webkit-autofill {
     display: flex;
     border-bottom: solid 1px $color-positive-lighter;
     transition: all $fastest ease;
+    background-repeat: no-repeat;
+    background-position: right 40px;
+
     &.active {
       .input label {
         top: 0;
       }
     }
-    
+
     &.focus {
       border-color: $color-focus;
-      
+
       .input input {
         color: $color-main;
       }
     }
-    
+
     &.disabled {
       border-bottom: dotted 1px $color-positive-lighter;
       .input input {
@@ -38,30 +41,134 @@ input:-webkit-autofill {
         cursor: not-allowed;
       }
     }
-    
+
+    &.error {
+      border-bottom: solid 1px $color-fb-negative;
+      background-image: url(../images/warning.svg);
+      background-position: right center;
+
+      .input label {
+        color: $color-fb-negative;
+      }
+    }
+
     .input {
       flex: 1 1 100%;
       position: relative;
-      
+
       label {
         color: $color-positive-light;
         font-size: $font-size-xs;
         line-height: 16px;
         pointer-events: none;
         position: absolute;
-        top: $spacing*2;
+        top: $spacing * 2;
         right: 0;
         left: 0;
         transition: all $fastest ease;
       }
-      
+
       input {
         background-color: transparent;
-        padding: $spacing*2 0 $spacing;
+        padding: $spacing * 2 0 $spacing;
         width: 100%;
         font-size: $font-size-s;
         line-height: 16px;
       }
+    }
+  }
+
+  &-prefix {
+    display: flex;
+    border-bottom: solid 1px $color-positive-lighter;
+    transition: all $fastest ease;
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: right 40px;
+
+    &.active {
+      .input label {
+        top: 0;
+      }
+    }
+
+    &.focus {
+      border-color: $color-focus;
+
+      .input input {
+        color: $color-main;
+      }
+    }
+
+    &.disabled {
+      border-bottom: dotted 1px $color-positive-lighter;
+      .input input {
+        color: $color-positive-lighter;
+        cursor: not-allowed;
+      }
+    }
+
+    &.error {
+      border-bottom: solid 1px $color-fb-negative;
+      background-image: url(../images/warning.svg);
+      background-position: right center;
+
+      .input label {
+        color: $color-fb-negative;
+      }
+    }
+
+    .input {
+      flex: 1 1 100%;
+      position: relative;
+
+      label {
+        color: $color-positive-light;
+        font-size: $font-size-xs;
+        line-height: 16px;
+        pointer-events: none;
+        position: absolute;
+        top: $spacing * 2;
+        right: 0;
+        left: 0;
+        transition: all $fastest ease;
+      }
+
+      input {
+        background-color: transparent;
+        padding: $spacing * 2 0 $spacing;
+        width: 100%;
+        font-size: $font-size-s;
+        line-height: 16px;
+      }
+    }
+  }
+
+  &-prefix-box {
+    position: absolute;
+    z-index: 1;
+    width: 240px;
+    height: 192px;
+    animation: prefix-select;
+    animation-duration: 300ms;
+    animation-iteration-count: 1;
+
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+      height: 24px;
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 1) 100%
+      );
+
+      border-bottom-left-radius: $radius;
+      border-bottom-right-radius: $radius;
     }
   }
 }
